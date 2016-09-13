@@ -16,6 +16,9 @@ public class WayPointFile extends JsonFile{
     private JSONArray jWaypoints;
     private String file_name;
     private String path_name;
+    public int get_last_fihish_index(){
+        return index_first_id(0);
+    }
     public static WayPointFile load(String prj_name)
     {
         return new WayPointFile(prj_name);
@@ -44,8 +47,7 @@ public class WayPointFile extends JsonFile{
         WayPoints.get(index).status=status;
         return this;
     }
-    public WayPointFile delete_by_id(int index)
-    {
+    public WayPointFile delete_by_id(int index) {
         WayPoints.remove(index);
         write();
         return this;

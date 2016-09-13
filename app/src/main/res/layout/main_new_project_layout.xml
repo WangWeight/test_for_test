@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="150dp"
-              android:background="@color/colorWhiteOpicity"
+              android:background="@drawable/bg_layout"
               android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,21 +15,20 @@
             android:layout_weight="1"
             android:singleLine="true"/>
         <TextView
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:id="@+id/main_prj_del_bt"
             android:text="x"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="15dp"
+            android:background="@color/colorTouming"
+            android:layout_gravity="center_vertical"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="|"/>
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center_horizontal"
             android:id="@+id/main_prj_add_bt"
             android:text="+"/>
     </LinearLayout>

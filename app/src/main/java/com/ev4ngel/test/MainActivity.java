@@ -67,6 +67,7 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         mProject.get_wp_file().add_waypoint(1222, 3353, 4);
         mProject.get_wp_file().add_waypoint(1322, 3343, 14);
         mProject.get_wp_file().add_waypoint(1422,3533,14);
+        mProject.get_wp_file().change_status(1,100);
         ArrayList<WayPoint> a=mProject.get_wp_file().get_waypoints();
         a.add(new WayPoint(222,333,44));
         line_frg.setOnAddPrjListener(this);
