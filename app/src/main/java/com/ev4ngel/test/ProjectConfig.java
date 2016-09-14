@@ -84,7 +84,7 @@ public class ProjectConfig extends JsonFile{
     }
     public boolean isExistsWaypoint(String name)
     {
-        if(new File(name).exists())
+        if(new File(name+".txt").exists())
             return true;
         return false;
     }

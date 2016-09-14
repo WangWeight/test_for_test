@@ -64,35 +64,34 @@ public class ProjectsConfig extends JsonFile{
     }
     public ProjectConfig add_prj(String name)//No same name should be add
     {
-        try {
-            jObj.put(item_RP, name);
-        }catch (JSONException je)
-        {
-            Log.w("e","Set rp fail");
-        }
-        JSONArray ja=null;
-        try {
-            ja = jObj.getJSONArray(item_PRJS);
-        }catch (JSONException je)
-        {
-            Log.w("e","getJsonArray fail");
-        }
-        if (ja == null) {
-            ja = new JSONArray();
+        if(!project_names.contains(name)) {
+
             try {
-                jObj.put(item_PRJS, ja);
-            }catch (Exception e)
-            {
-                Log.w("e","xxxxgetJsonArray fail");
+                jObj.put(item_RP, name);
+            } catch (JSONException je) {
+                Log.w("e", "Set rp fail");
             }
+            JSONArray ja = null;
+            try {
+                ja = jObj.getJSONArray(item_PRJS);
+            } catch (JSONException je) {
+                Log.w("e", "getJsonArray fail");
+            }
+            if (ja == null) {
+                ja = new JSONArray();
+                try {
+                    jObj.put(item_PRJS, ja);
+                } catch (Exception e) {
+                    Log.w("e", "xxxxgetJsonArray fail");
+                }
+            }
+            try {
+                ja.put(name);
+            } catch (Exception e) {
+                Log.w("e", "xxxxgetJsonArray fail");
+            }
+            project_names.add(name);
         }
-        try {
-            ja.put(name);
-        }catch (Exception e)
-        {
-            Log.w("e","xxxxgetJsonArray fail");
-        }
-        project_names.add(name);
         return ProjectConfig.load(name);
     }
     public boolean delect(String pname)

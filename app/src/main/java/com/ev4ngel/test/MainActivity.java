@@ -1,7 +1,6 @@
 package com.ev4ngel.test;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,12 +19,15 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
     MainMenuFrg main_frg;
     Project mProject=null;
     ProjectsConfig mPrjsCfg=null;
+    public  void i(String msg){
+        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-
+/*
         main_frg=(MainMenuFrg) getFragmentManager().findFragmentById(R.id.xxxx);
         prj_frg=new ProjectOptFrg();
         line_frg=new ProjectOptFrg();
@@ -36,40 +38,51 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         if(savedInstanceState!=null){
             mProject.load_project(savedInstanceState.getString("last_prj"));
         }else {
-            mProject = new Project();
-            mPrjsCfg = ProjectsConfig.load(Project.root_dirname);
-            if (mPrjsCfg.recent_project.isEmpty()) {
-                mProject.load_default_project();
-                mPrjsCfg.setRecent_project(Project.prj_default_name);
-            } else {
-                mProject.load_project(mPrjsCfg.recent_project);
-            }
-            mPrjsCfg.write();
+
         }
-        /*
+        */
+        mProject = new Project();
+        mPrjsCfg = ProjectsConfig.load(Project.root_dirname);
+        if (mPrjsCfg.recent_project.isEmpty()) {
+            mProject.load_default_project();
+            mPrjsCfg.setRecent_project(Project.prj_default_name);
+            mPrjsCfg.write();
+        } else {
+            mProject.load_project(mPrjsCfg.recent_project);
+        }
+
+        //mProject.get_waypoint_file().get_waypoints();
+        //ArrayList<WayPoint> a=mProject.get_current_waypoints();
+        //mProject.get_waypoint_file().change_status(1,100000);
+        //mProject.save();
+        //int i=mProject.get_waypoint_file().index_first_id(100000);
+        //i=1;
         mProject.new_project("xxx", true);
-        mProject.new_project("xxx2", true);
-        mProject.new_project("xxx3", true);
         mPrjsCfg.add_prj("xxx");
+        mProject.new_project("xxx2", true);
         mPrjsCfg.add_prj("xxx2");
+        mProject.new_project("xxx3", true);
         mPrjsCfg.add_prj("xxx3");
         mPrjsCfg.setRecent_project("xxx3");
         mProject.new_waypoint_file("aaaa", true);
-        mProject.new_waypoint_file("aaaa1",true);
-        mProject.new_waypoint_file("aaaa2",true);
+        mProject.new_waypoint_file("aaaa1", true);
+        mProject.new_waypoint_file("aaaa2", true);
         mPrjsCfg.write();
-        mProject.load_project("aaaa1");
-        */
-        mProject.load_project("xxx2");
-        mProject.load_project("xxx3");
-        mProject.load_waypoint("aaaa2");
-        mProject.get_wp_file().add_waypoint(122, 3343, 4);
-        mProject.get_wp_file().add_waypoint(1222, 3353, 4);
-        mProject.get_wp_file().add_waypoint(1322, 3343, 14);
-        mProject.get_wp_file().add_waypoint(1422,3533,14);
-        mProject.get_wp_file().change_status(1,100);
-        ArrayList<WayPoint> a=mProject.get_wp_file().get_waypoints();
-        a.add(new WayPoint(222,333,44));
+        int rlt=mProject.load_project("aaaa1");
+        rlt=mProject.load_project("xxx2");
+        rlt=mProject.load_project("xxx3");
+        mProject.load_waypoint_file("aaaa2");
+        mProject.get_waypoint_file().add_waypoint(122, 3343, 4);
+        mProject.get_waypoint_file().add_waypoint(1222, 3353, 4);
+        mProject.get_waypoint_file().add_waypoint(1322, 3343, 14);
+        mProject.get_waypoint_file().add_waypoint(1422, 3533, 14);
+        mProject.save();
+        mProject.get_waypoint_file().change_status(1,100);
+        //ArrayList<WayPoint> a=mProject.get_waypoint_file().get_waypoints();
+        //a.add(new WayPoint(22211111,333,44));
+        mProject.save();
+        /**/
+        /*
         line_frg.setOnAddPrjListener(this);
         line_frg.setOnDeletePrjListener(this);
         line_frg.setOnOpenPrjListener(this);
@@ -84,7 +97,7 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
             public void onClick(View v) {
                 sd.show(getFragmentManager(),"xxx");
             }
-        });
+        });*/
     }
     public static void log(String msg){
         Log.i("w2", msg);
@@ -92,8 +105,8 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
     @Override
     protected void onStart() {
         super.onStart();
-        prj_frg.setPrj_names(new ArrayList<String>());
-        line_frg.setPrj_names(new ArrayList<String>());
+        //prj_frg.setPrj_names(new ArrayList<String>());
+        //line_frg.setPrj_names(new ArrayList<String>());
     }
 
     @Override

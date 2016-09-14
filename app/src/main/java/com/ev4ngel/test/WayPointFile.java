@@ -16,7 +16,7 @@ public class WayPointFile extends JsonFile{
     private JSONArray jWaypoints;
     private String file_name;
     private String path_name;
-    public int get_last_fihish_index(){
+    public int get_last_finish_index(){
         return index_first_id(0);
     }
     public static WayPointFile load(String prj_name)
@@ -26,12 +26,14 @@ public class WayPointFile extends JsonFile{
     private WayPointFile(String prjName)
     {
         super(prjName);
+        WayPoints= new ArrayList<>();
     }
     public void read(String fname)
     {
+        if(!fname.endsWith(".txt"))
+            fname+=".txt";
         mFilename=Project.root_dirname+Project.fix_name(mPrjname)+Project.waypoints_dirname+fname;
         open(true);
-        WayPoints= new ArrayList<>();
         JSONArray ja=parse_content_to_array();
         for(int i=0;i<ja.length();i++)
         {

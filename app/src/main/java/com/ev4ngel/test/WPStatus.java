@@ -74,7 +74,6 @@ public class WPStatus implements IJson{
         return jo;
     }
 
-
     public void fromJson(JSONObject jo) {
         try{
             mName=jo.getString(ProjectConfig.item_name);

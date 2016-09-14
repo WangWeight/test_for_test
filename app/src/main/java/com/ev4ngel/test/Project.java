@@ -3,6 +3,7 @@ package com.ev4ngel.test;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/7/21.
@@ -28,11 +29,10 @@ public class Project {
     public  static String photopoints_dirname="photowaypoints/";
     public static String prj_config_fname="config.txt";
     public static String prj_default_name="默认项目/";
-    //private ProjectsConfig mPsc;
-    private ProjectConfig mPc;
+    private ProjectConfig mPcf;
     private PhotoWayPointFile mPwf;
-    private String current_airway_name="";//航点，区域，存储的全部文件为此名字
     private WayPointFile mWpf;
+    private String current_airway_name="";//航点，区域，存储的全部文件为此名字
     public String current_project_name="";
     private OnLoadItemListener mOnLoader=null;
     public Project()
@@ -54,6 +54,12 @@ public class Project {
     {
         current_airway_name=name;
     }
+    public ArrayList<WayPoint> get_current_waypoints(){
+        if(mWpf!=null){
+            return mWpf.get_waypoints();
+        }
+        return new ArrayList<>();
+    }
     public void delete_airway(String name)
     {
         if(current_airway_name.equals(name))
@@ -61,17 +67,12 @@ public class Project {
             close_airway();
         }
     }
-    public void load_airway(String name)
-    {
-        mWpf.read(name);
-        mPwf.read(name);
-        //mAf.read(name);
-    }
-    public WayPointFile get_wp_file()
+
+    public WayPointFile get_waypoint_file()
     {
         return mWpf;
     }
-    public PhotoWayPointFile get_pwp_file()
+    public PhotoWayPointFile get_photowaypoint_file()
     {
         return mPwf;
     }
@@ -89,7 +90,7 @@ public class Project {
                     //mPsc.delect(name);//Delete from config file
                     //mPsc.write();
                     close_airway();
-                    mPc.close();
+                    mPcf.close();
                     return 0;
                 }else{
                     return 1;
@@ -143,6 +144,7 @@ public class Project {
     public int load_project(String name)//the name must exists
     {
         name=fix_name(name);
+        current_airway_name="";
         if(name.equals(current_project_name))
             return 1;
         if(!isExistProject(name))
@@ -150,30 +152,29 @@ public class Project {
             new_project(name,false);
         }
         current_project_name=name;
-        mPc=ProjectConfig.load(name);
+        mPcf =ProjectConfig.load(name);
         mPwf=PhotoWayPointFile.load(name);
         mWpf = WayPointFile.load(name);
-        if(!mPc.recent_file.isEmpty() &&mPc.isExistsWaypoint(root_dirname+name+waypoints_dirname+mPc.recent_file)){
-            load_waypoint(mPc.recent_file);
+        if(!mPcf.recent_file.isEmpty() && mPcf.isExistsWaypoint(root_dirname+name+waypoints_dirname+ mPcf.recent_file)){
+            load_waypoint_file(mPcf.recent_file);
+            current_airway_name=mPcf.recent_file;
         }
         return 0;
     }
-    public void load_waypoint(String name){
+    public void load_waypoint_file(String name){
         if(!name.equals(current_airway_name)) {
-            mPc.recent_file = name;
-            mPc.write();
+            mPcf.recent_file = name;
+            mPcf.write();
             current_airway_name=name;
             mPwf.read(name);
             mWpf.read(name);
         }
-        //if(mOnLoader!=null)
-        //    mOnLoader.onLoadWaypoint(name);
     }
     public Project new_waypoint_file(String name,boolean loadAfterMake)
     {
-        mPc.add_waypoint_file(name);
+        mPcf.add_waypoint_file(name);
         if(loadAfterMake)
-            load_waypoint(name);
+            load_waypoint_file(name);
         return this;
     }
     public void close_airway()
@@ -188,8 +189,8 @@ public class Project {
     {
         //if(mPsc!=null)
         //    mPsc.write();
-        if(mPc!=null)
-            mPc.write();
+        if(mPcf !=null)
+            mPcf.write();
         if(mPwf!=null)
             mPwf.write();
         if(mWpf!=null)
@@ -200,8 +201,8 @@ public class Project {
         current_project_name="";
         //if(mPsc!=null)
         //    mPsc.close();
-        if(mPc!=null)
-            mPc.close();
+        if(mPcf !=null)
+            mPcf.close();
     }
 /*
     public void load_recent_project()
