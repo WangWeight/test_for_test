@@ -100,14 +100,16 @@ public class MainMenuFrg extends Fragment implements View.OnClickListener,
     }
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        mOnViewClickedListener.onSwitchChanged(isChecked);
+        if(mOnViewClickedListener!=null)
+            mOnViewClickedListener.onSwitchChanged(isChecked);
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if(hidden){
-            mOnViewClickedListener.onHideAll();
+            if(mOnViewClickedListener!=null)
+                mOnViewClickedListener.onHideAll();
         }
     }
 }

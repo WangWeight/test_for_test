@@ -13,7 +13,8 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         ProjectOptFrg.OnOpenProjectListener,
         ProjectOptFrg.OnDeleteProjectListener,
         ProjectOptFrg.OnAddProjectListener,
-        MainMenuFrg.OnViewClickedShower{
+        MainMenuFrg.OnViewClickedShower,
+        WayDesignFrg.OnSelectListener{
     ProjectOptFrg prj_frg;
     ProjectOptFrg line_frg;
     MainMenuFrg main_frg;
@@ -27,6 +28,16 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
+        ProjectDatabase pdb=new ProjectDatabase(this);
+        for(int i=0;i<10;i++)
+            pdb.addProject("wangwei"+i);
+        pdb.addProject("waa");
+        pdb.addProject("waa");
+        pdb.openProject("wangwei1");
+        pdb.deleteProject("waa");
+        ArrayList<String> a=pdb.getProjects();
+
+        ((WayDesignFrg) getFragmentManager().findFragmentById(R.id.xx)).setOnSelectListener(this);
 /*
         main_frg=(MainMenuFrg) getFragmentManager().findFragmentById(R.id.xxxx);
         prj_frg=new ProjectOptFrg();
@@ -150,5 +161,10 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
     @Override
     public void onHideAll() {
 
+    }
+
+    @Override
+    public void onMenuItemSelect(WayDesignFrg.Status status) {
+        Log.i("E","status:"+status);
     }
 }
