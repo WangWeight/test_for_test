@@ -9,6 +9,17 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:gravity="center_horizontal"
+        android:text="Load"
+        android:background="@drawable/way_design_item_bg"
+        android:id="@+id/way_load_tv"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
         android:text="Design"
         android:background="@drawable/way_design_item_bg"
         android:id="@+id/way_design_tv"

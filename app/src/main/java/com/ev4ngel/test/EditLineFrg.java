@@ -107,6 +107,7 @@ public class EditLineFrg  extends Fragment implements View.OnClickListener{
                 }
             }else{
                 vv.setVisibility(View.GONE);
+                if(mOnViewClickedListener!=null)
                 mOnViewClickedListener.onViewClicked(vv,false);
             }
         }

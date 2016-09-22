@@ -28,16 +28,70 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-        ProjectDatabase pdb=new ProjectDatabase(this);
-        for(int i=0;i<10;i++)
-            pdb.addProject("wangwei"+i);
-        pdb.addProject("waa");
-        pdb.addProject("waa");
-        pdb.openProject("wangwei1");
-        pdb.deleteProject("waa");
-        ArrayList<String> a=pdb.getProjects();
+        //ProjectDatabase pdb=ProjectDatabase.getInstance(this);
+/*
+        for(int ij=70;ij<100;ij++) {
+            pdb.addProject("new_prj_"+ij);
+            Log.i("E", "new Project:" + pdb.openProject("new_prj_" + ij));
+            for(int i=0;i<10;i++)
+            {
+                pdb.addWayline("line_" + i);
+                pdb.openWayline("line_" + i);
+                for(int j=0;j<20;j++){
+                    pdb.addWayPoint(0,new WayPoint());
+                    pdb.addPhotoInfo("Photo"+j,j,j,j,j);
+                }
+            }
+        }
+        try{
+            Thread.sleep(1);
+        }catch (Exception e){}
+        for(int ij=70;ij<100;ij++) {
+            ProjectInstance pi=pdb.getDetailProject("new_prj_" + ij);
+            Log.i("XXX",pi.getName()+":"+pi.getAccess_time()+":"+pi.getCreate_time());
+            pdb.openProject("new_prj_"+ij);
+            Log.i("xxx",pdb.getWayPointList().toString());
+            ArrayList<String> a=pdb.getWaylines(null);
+            Log.i("xxx", "open prj:new_prj" + ij + ",new_line:" + a.toString());
+            if(a.size()>0){
+                Log.i("xxx","new_line:"+a.get(0));
+                Log.i("xxx","new_line:"+pdb.getWaypoints(a.get(0)));
+            }
+            try{
+                Thread.sleep(1);
+            }catch (Exception e){}
 
-        ((WayDesignFrg) getFragmentManager().findFragmentById(R.id.xx)).setOnSelectListener(this);
+        }*/
+        ((CrossView)findViewById(R.id.xx)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(),"xxx",Toast.LENGTH_SHORT).show();
+            }
+        });
+        final PoseBall pb=(PoseBall)findViewById(R.id.pose_ball);
+        pb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long l=System.currentTimeMillis();
+               int r=(int)l/100%90-45;
+                int p=(int)l%90-45;
+                int y=(int)l/10000/180;
+
+                pb.updateStatus(r,p);
+            }
+        });
+        /*
+        pdb.openProject("wangwei89");
+        pdb.openProject("wangwei80");
+
+        for(int i=0;i<10;i++)
+        {
+            pdb.openWayline("line_" + i);
+        }
+        Log.i("E", ",id:" + pdb.getCurrent_project_id());
+*/
+       // ((WayDesignFrg) getFragmentManager().findFragmentById(R.id.xx)).setOnSelectListener(this);
 /*
         main_frg=(MainMenuFrg) getFragmentManager().findFragmentById(R.id.xxxx);
         prj_frg=new ProjectOptFrg();
@@ -51,7 +105,7 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         }else {
 
         }
-        */
+
         mProject = new Project();
         mPrjsCfg = ProjectsConfig.load(Project.root_dirname);
         if (mPrjsCfg.recent_project.isEmpty()) {
@@ -61,13 +115,14 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         } else {
             mProject.load_project(mPrjsCfg.recent_project);
         }
-
+*/
         //mProject.get_waypoint_file().get_waypoints();
         //ArrayList<WayPoint> a=mProject.get_current_waypoints();
         //mProject.get_waypoint_file().change_status(1,100000);
         //mProject.save();
         //int i=mProject.get_waypoint_file().index_first_id(100000);
         //i=1;
+        /*
         mProject.new_project("xxx", true);
         mPrjsCfg.add_prj("xxx");
         mProject.new_project("xxx2", true);
@@ -92,7 +147,7 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
         //ArrayList<WayPoint> a=mProject.get_waypoint_file().get_waypoints();
         //a.add(new WayPoint(22211111,333,44));
         mProject.save();
-        /**/
+        */
         /*
         line_frg.setOnAddPrjListener(this);
         line_frg.setOnDeletePrjListener(this);
@@ -102,13 +157,13 @@ public class MainActivity extends Activity implements StartMissionDialog.OnMissi
                 .add(R.id.line_frg, line_frg, "line_frg")
                 .hide(prj_frg).hide(line_frg).commit();
         final StartMissionDialog sd=new StartMissionDialog();
-        sd.setOnMissionAskedShowListener(this);
+        sd.setOnMissionAskedShowListener(this);*/
         findViewById(R.id.image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sd.show(getFragmentManager(),"xxx");
+                Toast.makeText(getApplicationContext(),"Img",Toast.LENGTH_SHORT).show();//sd.show(getFragmentManager(),"xxx");
             }
-        });*/
+        });
     }
     public static void log(String msg){
         Log.i("w2", msg);

@@ -14,6 +14,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:src="@drawable/bg"/>
+    <com.ev4ngel.test.CrossView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:id="@+id/xx"/>
+    <com.ev4ngel.test.PoseBall
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/pose_ball"/>
 <fragment
     android:layout_width="100dp"
     android:layout_height="300dp"
@@ -22,13 +32,7 @@
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
     />
-    <fragment
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:name="com.ev4ngel.test.WayDesignFrg"
-        android:id="@+id/xx"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+
     <FrameLayout
         android:id="@+id/prj_frg"
         android:layout_width="wrap_content"
